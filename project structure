@@ -1,24 +1,44 @@
-healthcare-monitoring-system
-│
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── healthcare
-│   │   │           ├── dao
+healthcare-monitoring-system/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── healthcare/
+│   │   │           ├── controller/        # Servlets to handle requests
+│   │   │           │   ├── UserServlet.java
+│   │   │           │   └── AuthServlet.java
+│   │   │           ├── dao/               # Data Access Objects for database operations
 │   │   │           │   └── UserDAO.java
-│   │   │           ├── servlets
-│   │   │           │   └── UserServlet.java
-│   │   │           └── util
+│   │   │           ├── models/            # POJO classes
+│   │   │           │   └── User.java
+│   │   │           ├── services/          # Business logic layer
+│   │   │           │   └── UserService.java
+│   │   │           └── util/              # Utility classes
 │   │   │               └── DBConnection.java
-│   │   ├── resources
-│   │   └── webapp
-│   │       ├── WEB-INF
-│   │       │   └── web.xml
-│   │       ├── userForm.jsp
-│   │       └── userProfile.jsp
-│   └── test
-│       └── java
-│
-├── pom.xml
-└── target
+│   │   ├── resources/                     # Configuration files
+│   │   │   └── db.properties              # Database configuration
+│   │   ├── webapp/                        # Web resources
+│   │       ├── WEB-INF/
+│   │       │   ├── web.xml                # Web application deployment descriptor
+│   │       │   └── jsp/                   # JSP files
+│   │       │       ├── register.jsp       # User registration page
+│   │       │       ├── login.jsp          # Login page
+│   │       │       ├── dashboard.jsp      # Dashboard page
+│   │       │       └── error.jsp          # Error page
+│   │       └── assets/                    # Static resources
+│   │           ├── css/
+│   │           │   └── styles.css         # Custom styles
+│   │           ├── js/
+│   │           │   └── scripts.js         # JavaScript files
+│   │           └── images/                # Images and icons
+│   └── test/                              # Unit test directory
+│       └── java/
+│           └── com/
+│               └── healthcare/
+│                   └── dao/
+│                       └── UserDAOTest.java
+├── pom.xml                                # Maven Project Object Model file
+├── README.md                              # Project documentation
+└── db_scripts/
+    └── create_tables.sql                  # SQL script to create database tables
+
