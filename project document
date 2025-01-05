@@ -1,0 +1,157 @@
+# Healthcare Monitoring System
+
+## Overview
+
+The **Healthcare Monitoring System** is a comprehensive web-based application designed to streamline the management and monitoring of healthcare-related data. The system allows users to register, log in, and manage their profiles while providing a platform for storing and accessing health metrics. It integrates backend processing with MySQL, user-friendly frontend interfaces, and robust testing frameworks to deliver a seamless experience.
+
+---
+
+## Features
+
+### User Management
+
+- **Registration**: Allows new users to create accounts by providing their details.
+- **Login**: Secure authentication for accessing personalized features.
+- **Profile Management**: Users can update their personal information.
+
+### Data Management
+
+- **Health Data Storage**: Users can input and manage their healthcare data.
+- **Database Integration**: Efficient data handling with MySQL.
+
+### Frontend Design
+
+- **Responsive Design**: Ensures compatibility with various devices and screen sizes.
+- **Dynamic Content**: JSP pages render user-specific information dynamically.
+
+### Backend Processing
+
+- **Java Servlets**: Handle HTTP requests and execute business logic.
+- **JDBC**: Manage secure and reliable database connections.
+- **DAO Pattern**: Simplifies database operations and promotes code modularity.
+
+### Testing
+
+- **JUnit**: Backend functionality is rigorously tested to ensure reliability.
+
+---
+
+## Technologies Used
+
+### Backend
+
+- **Java**: Implements application logic and server-side processing.
+- **MySQL**: Stores user information and healthcare metrics.
+- **JDBC**: Manages database connectivity.
+
+### Frontend
+
+- **HTML, CSS, JavaScript**: For structuring, styling, and adding interactivity.
+- **JSP**: Generates dynamic content based on user input.
+
+### Build Tool
+
+- **Maven**: Manages dependencies and builds the project.
+
+### Testing
+
+- **JUnit**: Validates functionality of backend methods and modules.
+
+---
+
+## Project Structure
+
+```
+healthcare-monitoring-system/
+├── demo/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/
+│   │   │   │       └── healthcare/
+│   │   │   │           ├── dao/
+│   │   │   │           │   └── UserDAO.java
+│   │   │   │           ├── models/
+│   │   │   │           │   └── User.java
+│   │   │   │           └── util/
+│   │   │   │               └── DBConnection.java
+│   │   │   ├── resources/
+│   │   │   ├── webapp/
+│   │   │   │   ├── WEB-INF/
+│   │   │   │   │   └── web.xml
+│   │   │   │   └── pages/
+│   │   │   │       ├── index.jsp
+│   │   │   │       ├── login.jsp
+│   │   │   │       └── register.jsp
+│   │   └── test/
+│   │       └── java/
+│   │           └── com/
+│   │               └── healthcare/
+│   │                   └── dao/
+│   │                       └── UserDAOTest.java
+├── pom.xml
+└── README.md
+```
+
+---
+
+## Database Design
+
+### Tables
+
+#### Users Table
+
+| Column   | Type         | Description            |
+| -------- | ------------ | ---------------------- |
+| id       | INT (PK)     | User ID                |
+| username | VARCHAR(255) | Name of the user       |
+| email    | VARCHAR(255) | User's email address   |
+| password | VARCHAR(255) | Encrypted password     |
+| role     | VARCHAR(50)  | User role (admin/user) |
+
+#### Healthcare Data Table (Optional)
+
+| Column        | Type         | Description                |
+| ------------- | ------------ | -------------------------- |
+| id            | INT (PK)     | Record ID                  |
+| user\_id      | INT (FK)     | Reference to Users table   |
+| metric\_name  | VARCHAR(255) | Name of the health metric  |
+| metric\_value | VARCHAR(255) | Value of the health metric |
+| timestamp     | TIMESTAMP    | Time when data was added   |
+
+---
+
+## How to Run the Project
+
+1. **Clone the Repository**:
+
+   ```bash
+   https://github.com/bhaskar950880/Healthcare-monitoring-system_Online.git
+   ```
+
+2. **Setup the Database**:
+
+   - Import the provided SQL script to set up the required tables.
+   - Update the database credentials in `DBConnection.java`.
+
+3. **Build the Project**:
+
+   ```bash
+   mvn clean install
+   ```
+
+---
+
+## Future Enhancements
+
+- **Encryption**: Implement encryption for sensitive user data.
+- **Dashboard**: Add a graphical dashboard for visualizing healthcare metrics.
+- **Mobile Integration**: Extend functionality to a mobile application.
+- **Role-Based Access**: Introduce distinct access levels for admins and users.
+
+---
+
+## License
+
+This project is licensed under the MIT License. For more details, refer to the LICENSE file.
+
