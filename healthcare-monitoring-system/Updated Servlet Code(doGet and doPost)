@@ -1,0 +1,78 @@
+package com.example.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/donor")
+public class MyServlet extends HttpServlet {
+
+    // Handle GET requests
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        // Respond with a form for donor registration
+        out.println("<html><body>");
+        out.println("<h1>Donor Registration</h1>");
+        out.println("<form method='POST' action='/donor'>");
+        out.println("Full Name: <input type='text' name='name' required><br>");
+        out.println("Email: <input type='email' name='email' required><br>");
+        out.println("Phone: <input type='text' name='phone' required><br>");
+        out.println("Blood Type: <select name='bloodType' required>");
+        out.println("<option value=''>Select</option>");
+        out.println("<option value='A+'>A+</option>");
+        out.println("<option value='A-'>A-</option>");
+        out.println("<option value='B+'>B+</option>");
+        out.println("<option value='B-'>B-</option>");
+        out.println("<option value='O+'>O+</option>");
+        out.println("<option value='O-'>O-</option>");
+        out.println("<option value='AB+'>AB+</option>");
+        out.println("<option value='AB-'>AB-</option>");
+        out.println("</select><br>");
+        out.println("<button type='submit'>Register</button>");
+        out.println("</form>");
+        out.println("</body></html>");
+    }
+
+    // Handle POST requests
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        // Retrieve form data from the POST request
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+        String bloodType = req.getParameter("bloodType");
+
+        // Validate the inputs (basic validation here, can be enhanced)
+        if (name == null || email == null || phone == null || bloodType == null || name.isEmpty() || email.isEmpty() || phone.isEmpty() || bloodType.isEmpty()) {
+            out.println("<html><body>");
+            out.println("<h1>Invalid Input</h1>");
+            out.println("<p>All fields are required. Please go back and try again.</p>");
+            out.println("</body></html>");
+            return;
+        }
+
+        // Simulate successful registration
+        out.println("<html><body>");
+        out.println("<h1>Registration Successful</h1>");
+        out.println("<p>Thank you, " + name + "!</p>");
+        out.println("<p>Your details:</p>");
+        out.println("<ul>");
+        out.println("<li>Email: " + email + "</li>");
+        out.println("<li>Phone: " + phone + "</li>");
+        out.println("<li>Blood Type: " + bloodType + "</li>");
+        out.println("</ul>");
+        out.println("</body></html>");
+
+        // Optionally: Save data to a database (requires additional setup)
+    }
+}
