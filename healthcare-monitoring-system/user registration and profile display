@@ -1,0 +1,99 @@
+package com.example.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/user")
+public class UserServlet extends HttpServlet {
+
+    // Handles GET requests: Display the registration form
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        // HTML form for user registration
+        out.println("<html>");
+        out.println("<head><title>User Registration</title></head>");
+        out.println("<body>");
+        out.println("<h1>User Registration</h1>");
+        out.println("<form action='/user' method='POST'>");
+        out.println("Name: <input type='text' name='name' required><br><br>");
+        out.println("Email: <input type='email' name='email' required><br><br>");
+        out.println("Password: <input type='password' name='password' required><br><br>");
+        out.println("<button type='submit'>Register</button>");
+        out.println("</form>");
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+    // Handles POST requests: Display the user profile
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        // User profile display
+        out.println("<html>");
+        out.println("<head><title>User Profile</title></head>");
+        out.println("<body>");
+        out.println("<h1>User Profile</h1>");
+        out.println("<p><strong>Name:</strong> " + name + "</p>");
+        out.println("<p><strong>Email:</strong> " + email + "</p>");
+        out.println("<p><strong>Password:</strong> " + password + "</p>");
+        out.println("</body>");
+        out.println("</html>");
+    }
+}
+
+
+
+
+//////////Enhanced doPost with Database Integration
+
+@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    String name = req.getParameter("name");
+    String email = req.getParameter("email");
+    String password = req.getParameter("password");
+
+    try {
+        // Database connection
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "root", "password");
+
+        // Insert data into the database
+        String query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, name);
+        stmt.setString(2, email);
+        stmt.setString(3, password);
+        stmt.executeUpdate();
+
+        conn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    // Display user profile
+    resp.setContentType("text/html");
+    PrintWriter out = resp.getWriter();
+    out.println("<html>");
+    out.println("<head><title>User Profile</title></head>");
+    out.println("<body>");
+    out.println("<h1>User Profile</h1>");
+    out.println("<p><strong>Name:</strong> " + name + "</p>");
+    out.println("<p><strong>Email:</strong> " + email + "</p>");
+    out.println("<p><strong>Password:</strong> " + password + "</p>");
+    out.println("</body>");
+    out.println("</html>");
+}
