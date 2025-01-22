@@ -33,53 +33,6 @@ This project uses technologies like Java, JSP, MySQL, and Maven for dependency m
 
 ---
 
-## Project Structure
-
-```
-healthcare-monitoring-system/
-├── demo/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/
-│   │   │   │   └── com/
-│   │   │   │       └── healthcare/
-│   │   │   │           ├── dao/
-│   │   │   │           │   └── UserDAO.java
-│   │   │   │           ├── models/
-│   │   │   │           │   └── User.java
-│   │   │   │           ├── services/
-│   │   │   │           │   └── UserService.java
-│   │   │   │           └── util/
-│   │   │   │               └── DatabaseConnection.java
-│   │   │   ├── webapp/
-│   │   │   │   ├── WEB-INF/
-│   │   │   │   │   ├── web.xml
-│   │   │   │   │   └── views/
-│   │   │   │   │       ├── index.jsp
-│   │   │   │   │       ├── login.jsp
-│   │   │   │   │       ├── register.jsp
-│   │   │   │   ├── assets/
-│   │   │   │   │   ├── css/
-│   │   │   │   │   │   └── style.css
-│   │   │   │   │   ├── js/
-│   │   │   │   │   │   └── script.js
-│   │   │   │   │   ├── images/
-│   │   │   │   │   │   └── logo.png
-│   │   └── test/
-│   │       └── java/
-│   │           └── com/
-│   │               └── healthcare/
-│   │                   ├── dao/
-│   │                   │   └── UserDAOTest.java
-│   │                   ├── services/
-│   │                   │   └── UserServiceTest.java
-│   │                   └── util/
-│   │                       └── DatabaseConnectionTest.java
-│   ├── pom.xml
-│   └── README.md
-```
-
----
 
 ## Installation and Setup
 
