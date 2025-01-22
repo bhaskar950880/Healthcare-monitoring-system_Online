@@ -1,0 +1,78 @@
+package com.example.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.*;
+
+@WebServlet("/register")
+public class UserServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        // Registration Form
+        out.println("<!DOCTYPE html>");
+        out.println("<html><head><title>User Registration</title></head><body>");
+        out.println("<h1>User Registration</h1>");
+        out.println("<form action='register' method='POST'>");
+        out.println("Name: <input type='text' name='name' required><br><br>");
+        out.println("Email: <input type='email' name='email' required><br><br>");
+        out.println("Password: <input type='password' name='password' required><br><br>");
+        out.println("<button type='submit'>Register</button>");
+        out.println("</form>");
+        out.println("</body></html>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Retrieve form data
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        try {
+            // Database connection
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "root", "password");
+
+            // Insert user data into database
+            String query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, name);
+            stmt.setString(2, email);
+            stmt.setString(3, password);
+
+            int rows = stmt.executeUpdate();
+
+            if (rows > 0) {
+                // Success page
+                out.println("<!DOCTYPE html>");
+                out.println("<html><head><title>Registration Successful</title></head><body>");
+                out.println("<h1>Registration Successful!</h1>");
+                out.println("<p><strong>Name:</strong> " + name + "</p>");
+                out.println("<p><strong>Email:</strong> " + email + "</p>");
+                out.println("<p><strong>Password:</strong> " + password + "</p>");
+                out.println("<a href='register'>Register Another User</a>");
+                out.println("</body></html>");
+            } else {
+                // Failure message
+                out.println("<h1>Error in registration. Please try again.</h1>");
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<h1>Error connecting to the database. Please check your setup.</h1>");
+        }
+    }
+}
